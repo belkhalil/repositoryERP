@@ -10,6 +10,6 @@ public interface IFormationMetier {
 	public List<Formation> getAll();
 	public Formation save(Formation dec);
 	public Formation update(Formation dec);
-	public Formation delete(Long id);
+	public boolean delete(Long id);
 	
 }

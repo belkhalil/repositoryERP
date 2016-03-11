@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+<title>all Student</title>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+	<div class="container">
+		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
+		<div th:if="${not #lists.isEmpty(students)}">
+			<h2>students List</h2>
+			<table class="table table-striped">
+				<tr>
+					
+					<th>cin</th>
+					<th>nom</th>
+					<th>Prenom</th>
+					<th>Adresse</th>
+					<th>Email</th>
+
+					<th>View</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+				<tr th:each="student : ${students}">
+
+					<td th:text="${student.cinUtilisateur}">cin</td>
+					<td th:text="${student.nomUtilisateur}">nom</td>
+					<td th:text="${student.prenomUtilisateur}">prenom</td>
+					<td th:text="${student.adresseUtilisateur}">adresseUtilisateur</td>
+					<td th:text="${student.emailUtilisateur}">email</td>
+
+
+					<td><a th:href="${'/student/' + student.idUtilisateur}">View</a></td>
+					<td><a th:href="${'/student/edit/' + student.idUtilisateur}">Edit</a></td>
+					<td><a th:href="${'/student/delete/' + student.idUtilisateur}">Delete</a></td>
+
+				</tr>
+			</table>
+
+		</div>
+
+	</div>
+
+</body>
+</html>

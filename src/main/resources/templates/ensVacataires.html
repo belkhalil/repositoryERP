@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+<title>enseignants vacataires</title>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+	<div class="container">
+		<!--/*/ <th:block th:include="fragments/headerEnsv :: header"></th:block> /*/-->
+
+		<div th:if="${not #lists.isEmpty(ensVacataires)}">
+			<h2>la liste des enseignant vacataire</h2>
+			<table class="table table-striped">
+				<tr>
+					
+					<th>cin</th>
+					<th>nom</th>
+					<th>Prenom</th>
+					<th>Adresse</th>
+					<th>Email</th>
+
+					<th>View</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+				<tr th:each="ensVacataire : ${ensVacataires}">
+
+					<td th:text="${ensVacataire.cinUtilisateur}">cin</td>
+					<td th:text="${ensVacataire.nomUtilisateur}">nom</td>
+					<td th:text="${ensVacataire.prenomUtilisateur}">prenom</td>
+					<td th:text="${ensVacataire.cinUtilisateur}">adresseUtilisateur</td>
+					<td th:text="${ensVacataire.emailUtilisateur}">email</td>
+
+
+					<td><a th:href="${'/ensVacataire/' + ensVacataire.idUtilisateur}">View</a></td>
+					<td><a th:href="${'/ensVacataire/edit/' + ensVacataire.idUtilisateur}">Edit</a></td>
+					<td><a th:href="${'/ensVacataire/delete/' + ensVacataire.idUtilisateur}">Delete</a></td>
+
+				</tr>
+			</table>
+
+		</div>
+
+	</div>
+
+</body>
+</html>

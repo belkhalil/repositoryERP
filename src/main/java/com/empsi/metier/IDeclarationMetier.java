@@ -9,6 +9,6 @@ public interface IDeclarationMetier {
 	public List<Declaration> getAll();
 	public Declaration save(Declaration dec);
 	public Declaration update(Declaration dec);
-	public Declaration delete(Long id);
+	public boolean delete(Long id);
 	
 }
