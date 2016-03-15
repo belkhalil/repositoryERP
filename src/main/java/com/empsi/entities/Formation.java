@@ -11,6 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+
 
 @Entity
 public class Formation implements Serializable{
@@ -25,8 +29,13 @@ public class Formation implements Serializable{
 	private Long idFormation;
 	private String nomFormation;
 	private String descFormation;
+	
+	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
+	
+	@Temporal(TemporalType.DATE)
 	private Date dateFin;
+	
 	private double prix;
 	@OneToMany(mappedBy = "formation")
     private List<Inscription> inscriptions;

@@ -11,4 +11,5 @@ public interface IAbsenceEnsMetier {
 	public AbsenceEns save(AbsenceEns abs);
 	public AbsenceEns update(AbsenceEns abs);
 	public boolean delete(Long id);
+
 }
