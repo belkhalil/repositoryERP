@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 
 @Entity
@@ -31,9 +33,11 @@ public class Formation implements Serializable{
 	private String descFormation;
 	
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat (pattern="YYYY-MMM-dd")
 	private Date dateDebut;
 	
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat (pattern="YYYY-MMM-dd")
 	private Date dateFin;
 	
 	private double prix;

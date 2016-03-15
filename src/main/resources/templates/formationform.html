@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="fr">
+
+    <title>ajouter une formation</title> 
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/headerFormation :: header"></th:block> /*/-->
+
+    <h2>formation Details</h2>
+    <div>
+        <form class="form-horizontal" th:object="${formation}" th:action="@{/formation}" method="post">
+            <input type="hidden" th:field="*{idFormation}"/>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label">formation</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{nomFormation}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">date de debut</label>
+                <div class="col-sm-10">
+                    <input type="date" placeholder="dd-mm-yyyy" class="form-control getdate" th:field="*{dateDebut}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">date de fin</label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" th:field="*{dateFin}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Description</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{descFormation}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">prix</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" th:field="*{prix}"/>
+                </div>
+            </div>
+            <div class="row">
+                <button type="submit" class="btn btn-default">Valider</button>
+            </div>
+        </form>
+    </div>
+    
+</div>
+
+</body>
+</html>
