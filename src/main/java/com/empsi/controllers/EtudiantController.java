@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.empsi.entities.users.Etudiant;
@@ -39,7 +40,7 @@ public Etudiant addStudent(@RequestBody Etudiant e)
  * @return
  */
 @RequestMapping(value ="/getOneStudent/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-public Etudiant getEtudiant(Long id)
+public Etudiant getEtudiant(@PathVariable("id") Long id)
 {
 	if(etudiantMetierImpl.get(id)!= null)
 	return etudiantMetierImpl.get(id);
@@ -63,20 +64,14 @@ public List<Etudiant> getAllstudent()
  */
 @RequestMapping(value="/deleteStudent/{id}",method = RequestMethod.DELETE)
 public boolean deleteEtudiant(@PathVariable("id") Long id)
-{
+{ 
      etudiantMetierImpl.delete(id);
      return true;
 }
 
 @RequestMapping(value="/updateStudent/{id}" ,method = RequestMethod.PUT)
-public Etudiant updateStudent(@PathVariable("id") Long id,@RequestBody String email,@RequestBody String adresse,@RequestBody String telgsm, @RequestBody String telfix)
+public Etudiant updateStudent(@PathVariable("id") Long id,@RequestBody Etudiant e)
 {
-	Etudiant e= etudiantMetierImpl.get(id);
-	e.setEmailUtilisateur(email);
-	e.setAdresseUtilisateur(adresse);
-	e.setTelUtilisateur(telgsm);
-	e.setTelFixUtilisateur(telfix);
-	
 	etudiantMetierImpl.Update(e);
 	return e;
 	}

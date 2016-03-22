@@ -3,8 +3,20 @@ var app=angular.module("MyApp",[]);
 app.factory('EtudiantService', ['$http', '$q', function($http, $q){
 	 
     return {
+    	    getOneStudent: function(id){
+    	    	return $http.get("/getOneStudent/"+id)
+    	    	.then(
+                                    function(response){
+                                        return response.data;
+                                    }, 
+                                    function(errResponse){
+                                        console.error('Error while fetching users');
+                                        return $q.reject(errResponse);
+                                    }
+    	    	);
+    	    },
             fetchAllStudents: function() {
-                    return $http.get("/students/")
+                    return $http.get("/students")
                             .then(
                                     function(response){
                                         return response.data;
@@ -15,6 +27,8 @@ app.factory('EtudiantService', ['$http', '$q', function($http, $q){
                                     }
                             );
             },
+            
+            
              
             createStudent: function(etudiant){
                     return $http.post("/save", etudiant)
@@ -43,38 +57,57 @@ app.factory('EtudiantService', ['$http', '$q', function($http, $q){
             },
              
             deleteStudent: function(id){
-                    return $http.delete("http://localhost:8080/empsiErp/deleteStudent/"+id)
+                    return $http.delete("/deleteStudent/"+id)
                             .then(
                                     function(response){
                                         return response.data;
                                     }, 
                                     function(errResponse){
-                                        console.error('Error while deleting user');
+                                        console.error('Error while deleting student');
                                         return $q.reject(errResponse);
                                     }
                             );
             }
          
     };
+    
+   
+    
  
 }]);
 
 app.controller('EtudiantController', ['$scope', 'EtudiantService', function($scope, EtudiantService) {
     var self = this;
-    self.etudiant={id:null,cin:'',cne:'',nom:'',prenom:'', adresse:'',email:''};
+    self.etudiant={idUtilisateur:null,cinUtilisateur:'',cne:'',nomUtilisateur:'',prenomUtilisateur:'', adresseUtilisateur:'',emailUtilisateur:''};
     self.etudiants=[];
          
+    self.getOneStudent = function(id){
+    	EtudiantService.getOneStudent(self.etudiant.idUtilisateur)
+    	 .then(
+                function(d) {
+                     self.etudiant = d;
+                     console.log(self.etudiant);
+                },
+                 function(errResponse){
+                     console.error('Error while fetching Currencies');
+                 }
+        );
+    };
+    
     self.fetchAllStudents = function(){
     	EtudiantService.fetchAllStudents()
             .then(
                          function(d) {
                               self.etudiants = d;
+                              
                          },
                           function(errResponse){
                               console.error('Error while fetching Currencies');
                           }
                  );
     };
+    
+    
       
     self.createStudent = function(){
     	EtudiantService.createStudent(self.etudiant)
@@ -101,28 +134,44 @@ app.controller('EtudiantController', ['$scope', 'EtudiantService', function($sco
                 .then(
                         self.fetchAllStudents, 
                         function(errResponse){
-                             console.error('Error while deleting User.');
+                             console.error('Error while deleting student.');
                         } 
             );
     };
 
     self.fetchAllStudents();
-
-    self.submit = function() {
-        if(self.etudiant.id===null){
-            console.log('Saving New User', self.etudiant);    
+    
+    self.update = function(){
+    	console.log('updating d\'un etudiant'+self.etudiant.idUtilisateur);
+    	self.updateStudent(self.etudiant, self.etudiant.idUtilisateur);
+    	self.reset();
+    };
+    
+    self.add=function(){
+    	if(self.etudiant.idUtilisateur===null){
+            console.log('Saving New student', self.etudiant);    
             self.createStudent(self.etudiant);
         }else{
-            self.updateStudent(self.etudiant, self.etudiant.id);
-            console.log('User updated with id ', self.etudiant.id);
+            self.updateStudent(self.etudiant, self.etudiant.idUtilisateur);
+            console.log('student updated with id ', self.etudiant.idUtilisateur);
         }
         self.reset();
     };
+    
+//    self.submit = function() {
+//        if(self.etudiant.id===null){
+//            console.log('Saving New student', self.etudiant);    
+//            self.createStudent(self.etudiant);
+//        }else{
+//            self.updateStudent(self.etudiant, self.etudiant.id);
+//            console.log('student updated with id ', self.etudiant.id);
+//        }
+//        self.reset();
+//    };
          
     self.edit = function(id){
-        console.log('id to be edited', id);
         for(var i = 0; i < self.etudiants.length; i++){
-            if(self.etudiants[i].id === id) {
+            if(self.etudiants[i].idUtilisateur == id) {
                self.etudiant = angular.copy(self.etudiants[i]);
                break;
             }
@@ -131,15 +180,12 @@ app.controller('EtudiantController', ['$scope', 'EtudiantService', function($sco
          
     self.remove = function(id){
         console.log('id to be deleted', id);
-        if(self.etudiant.id === id) {//clean form if the user to be deleted is shown there.
-           self.reset();
-        }
         self.deleteStudent(id);
     };
 
      
     self.reset = function(){
-        self.etudiant={id:null,cin:'',cne:'',nom:'',prenom:'', adresse:'',email:''};
+        self.etudiant={idUtilisateur:null,cinUtilisateur:'',cne:'',nomUtilisateur:'',prenomUtilisateur:'', adresseUtilisateur:'',emailUtilisateur:''};
         $scope.myForm.$setPristine(); //reset Form
     };
 

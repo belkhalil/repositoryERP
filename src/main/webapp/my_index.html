@@ -3,27 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>gestion etudiant</title>
-<style>
-      .cin.ng-valid {
-          background-color: lightgreen;
-      }
-      .cin.ng-dirty.ng-invalid-required {
-          background-color: red;
-      }
-      .cin.ng-dirty.ng-invalid-minlength {
-          background-color: yellow;
-      }
- 
-      .email.ng-valid {
-          background-color: lightgreen;
-      }
-      .email.ng-dirty.ng-invalid-required {
-          background-color: red;
-      }
-      .email.ng-dirty.ng-invalid-email {
-          background-color: yellow;
-      }
-    </style>
+
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -37,30 +17,26 @@
 			<div class="panel-heading">
 				<span class="lead">ajouter un etudiant </span>
 			</div>
+			<br>
 			<div class="formcontainer">
-				<form ng-submit="ctrl.submit()" name="myForm"
+				<form  name="myForm"
 					class="form-horizontal">
 					<input type="hidden" ng-model="ctrl.etudiant.id" />
 					
+					
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="cin"></label>
+							<label class="col-md-2 control-lable" for=""></label>
 							<div class="col-md-7">
-								<input type="text" ng-model="ctrl.etudiant.cin" id="cin"
-									class="cin form-control input-sm" placeholder=" cin"
-									required ng-minlength="3" />
-								<div class="has-error" ng-show="myForm.$dirty">
-									<span ng-show="myForm.cin.$error.required">This is a
-										required field</span> <span ng-show="myForm.cin.$error.minlength">Minimum
-										length required is 3</span> 
-								</div>
+								<input type="text" ng-model="ctrl.etudiant.cinUtilisateur" id="cin"
+									class="form-control input-sm" placeholder="cne" />
 							</div>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="cne"></label>
+							<label class="col-md-2 control-lable" for=""></label>
 							<div class="col-md-7">
 								<input type="text" ng-model="ctrl.etudiant.cne" id="cne"
 									class="form-control input-sm" placeholder="cne" />
@@ -70,9 +46,9 @@
 
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="nom"></label>
+							<label class="col-md-2 control-lable" for=""></label>
 							<div class="col-md-7">
-								<input type="text" ng-model="ctrl.etudiant.nom" id="nom"
+								<input type="text" ng-model="ctrl.etudiant.nomUtilisateur" id="nom"
 									class="form-control input-sm" placeholder="Nom" />
 							</div>
 						</div>
@@ -80,9 +56,9 @@
 
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="address"></label>
+							<label class="col-md-2 control-lable" for=""></label>
 							<div class="col-md-7">
-								<input type="text" ng-model="ctrl.etudiant.prenom" id="prenom"
+								<input type="text" ng-model="ctrl.etudiant.prenomUtilisateur" id="prenom"
 									class="form-control input-sm" placeholder="prenom" />
 							</div>
 						</div>
@@ -90,47 +66,34 @@
 
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="email"></label>
+							<label class="col-md-2 control-lable" for=""></label>
 							<div class="col-md-7">
-								<input type="email" ng-model="ctrl.etudiant.email" id="email"
-									class="email form-control input-sm" placeholder=" Email"
+								<input type="email" ng-model="ctrl.etudiant.emailUtilisateur" id="email"
+									class="form-control input-sm" placeholder=" Email"
 									required />
-								<div class="has-error" ng-show="myForm.$dirty">
-									<span ng-show="myForm.email.$error.required">This is a
-										required field</span>
-										 <span ng-show="myForm.email.$invalid">This
-										field is invalid </span>
-								</div>
+								
 							</div>
 						</div>
 					</div>
 					
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-lable" for="adresse"></label>
+							<label class="col-md-2 control-lable" for=""></label>
 							<div class="col-md-7">
-								<input type="email" ng-model="ctrl.etudiant.adresse"
-									id="adresse" class=" form-control input-sm"
-									placeholder="adresse" required />
-								<div class="has-error" ng-show="myForm.$dirty">
-									<span ng-show="myForm.adresse.$error.required">This is a
-										required field</span> <span ng-show="myForm.adresse.$invalid">This
-										field is invalid </span>
-								</div>
+								<input type="text" ng-model="ctrl.etudiant.adresseUtilisateur" id="adresse"
+									class="form-control input-sm" placeholder="adresse" />
 							</div>
 						</div>
 					</div>
 
 					<div class="row">
-						<div class="form-actions floatRight">
-							<input type="submit"
-								value="{{!ctrl.etudiant.id ? 'Add' : 'Update'}}"
-								class="btn btn-primary btn-sm" >
+						<div class="form-group col-md-12">
+						<div class="col-md-2 control-lable"></div>
+						<div class="col-md-7">
+						    <input type="button" ng-click="ctrl.update()" value="update" class="btn btn-primary btn-sm" >
+							<input type="button" ng-click="ctrl.add()" value="add" class="btn btn-primary btn-sm" >
 							<button type="button" ng-click="ctrl.reset()"
-								class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset
-								Form</button>
-								<button type="button" ng-click="ctrl.createStudent()"
-								class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">enregistrer</button>
+								class="btn btn-warning btn-sm" >Annuler</button>
 						</div>
 					</div>
 				</form>
@@ -159,7 +122,7 @@
 						<tr ng-repeat="e in ctrl.etudiants">
 							<td>{{e.cinUtilisateur}}</td>
 							<td>{{e.cne}}</td>
-							<td>{{e.nonUtilisateur}}</td>
+							<td>{{e.nomUtilisateur}}</td>
 							<td>{{e.prenomUtilisateur}}</td>
 							<td>{{e.adresseUtilisateur}}</td>
 							<td>{{e.emailUtilisateur}}</td>
@@ -168,6 +131,8 @@
 									class="btn btn-success custom-width">Edit</button>
 								<button type="button" ng-click="ctrl.remove(e.idUtilisateur)"
 									class="btn btn-danger custom-width">Remove</button>
+									<button type="button" ng-click="ctrl.getOneStudent()"
+									class="btn btn-primary custom-width">consulter infos</button>
 							</td>
 						</tr>
 					</tbody>
@@ -176,7 +141,22 @@
 		</div>
 	</div>
 <div>
-
+<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="lead">deltails  etudiant </span>
+			</div>
+			
+			<form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">cin</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" >{{etudiant.cinUtilisateur}}</p>
+                    </div>
+                </div>
+                
+                
+            </form>
+</div>
 
 	<script type="text/javascript" src="js/EtudiantController.js"></script>
 </body>
