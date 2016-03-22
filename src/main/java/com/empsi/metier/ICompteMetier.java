@@ -2,7 +2,7 @@ package com.empsi.metier;
 
 import java.util.List;
 
-import com.empsi.entities.Compte;
+import com.empsi.entities.users.Compte;
 
 
 public interface ICompteMetier {

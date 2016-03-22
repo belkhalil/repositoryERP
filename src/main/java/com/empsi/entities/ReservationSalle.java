@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.empsi.entities.users.Utilisateur;
 @Entity
 public class ReservationSalle implements Serializable{
 

@@ -1,11 +1,10 @@
-package com.empsi.entities;
+package com.empsi.entities.users;
 
 import java.io.Serializable;
 
 import javax.persistence.Entity;
-
 @Entity
-public class Administrateur extends Utilisateur implements Serializable{
+public class ResponsablePed extends Utilisateur implements Serializable{
 
 	/**
 	 * 

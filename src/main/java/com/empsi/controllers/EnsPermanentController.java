@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.empsi.entities.EnsPermanent;
+import com.empsi.entities.users.EnsPermanent;
 import com.empsi.metier.EnsPermanentMetierImpl;
 
 @Controller

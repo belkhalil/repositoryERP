@@ -1,4 +1,4 @@
-package com.empsi.entities;
+package com.empsi.entities.users;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+
+import com.empsi.entities.Matiere;
 
 @Entity
 public abstract class Enseignant extends Utilisateur implements Serializable {

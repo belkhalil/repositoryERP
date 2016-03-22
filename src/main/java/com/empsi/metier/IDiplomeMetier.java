@@ -2,7 +2,7 @@ package com.empsi.metier;
 
 import java.util.List;
 
-import com.empsi.entities.Diplome;
+import com.empsi.entities.users.Diplome;
 
 public interface IDiplomeMetier {
 	public Diplome get(Long id);

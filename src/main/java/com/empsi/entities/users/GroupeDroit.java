@@ -1,4 +1,4 @@
-package com.empsi.entities;
+package com.empsi.entities.users;
 
 import java.io.Serializable;
 import java.util.List;

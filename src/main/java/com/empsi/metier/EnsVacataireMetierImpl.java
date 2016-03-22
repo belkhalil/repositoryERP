@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.empsi.dao.EnsVacataireRepository;
-import com.empsi.entities.EnsVacataire;
+import com.empsi.entities.users.EnsVacataire;
 
 @Service
 public class EnsVacataireMetierImpl  implements IEnsVacataireMetier{

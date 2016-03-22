@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.empsi.entities.Declaration;
-import com.empsi.entities.Etudiant;
+import com.empsi.entities.users.Etudiant;
 import com.empsi.metier.DeclarationMetierImpl;
 import com.empsi.metier.EtudiantMetierImpl;
 

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.empsi.dao.DiplomeRepository;
-import com.empsi.entities.Diplome;
+import com.empsi.entities.users.Diplome;
 
 public class DiplomeMetierImpl implements IDiplomeMetier {
 

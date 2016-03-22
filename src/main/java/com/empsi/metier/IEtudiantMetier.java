@@ -2,7 +2,7 @@ package com.empsi.metier;
 
 import java.util.List;
 
-import com.empsi.entities.Etudiant;
+import com.empsi.entities.users.Etudiant;
 
 
 

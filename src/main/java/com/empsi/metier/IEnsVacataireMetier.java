@@ -2,7 +2,7 @@ package com.empsi.metier;
 
 import java.util.List;
 
-import com.empsi.entities.EnsVacataire;
+import com.empsi.entities.users.EnsVacataire;
 
 public interface IEnsVacataireMetier  {
 	

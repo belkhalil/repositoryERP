@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.empsi.dao.EtudiantRepository;
-import com.empsi.entities.Etudiant;
+import com.empsi.entities.users.Etudiant;
 
 @Service
 public class EtudiantMetierImpl implements IEtudiantMetier {

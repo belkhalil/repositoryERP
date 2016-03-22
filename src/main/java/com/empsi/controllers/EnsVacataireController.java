@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.empsi.entities.EnsVacataire;
+import com.empsi.entities.users.EnsVacataire;
 import com.empsi.metier.EnsVacataireMetierImpl;
 
 @Controller

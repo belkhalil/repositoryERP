@@ -1,4 +1,4 @@
-package com.empsi.entities;
+package com.empsi.entities.users;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -18,6 +18,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.empsi.entities.Declaration;
+import com.empsi.entities.Document;
+import com.empsi.entities.Notification;
+import com.empsi.entities.ReservationMateriel;
+import com.empsi.entities.Statut;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)

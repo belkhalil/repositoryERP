@@ -47,6 +47,7 @@ public class FormationController {
 
 	@RequestMapping(value ="/formation", method = RequestMethod.POST)
 	public String saveFormation(@Valid Formation forma , BindingResult bindingResult){
+		
 		formationMetierImpl.save(forma);
 		return "redirect:/formations";
 		

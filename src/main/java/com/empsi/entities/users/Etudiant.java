@@ -1,4 +1,4 @@
-package com.empsi.entities;
+package com.empsi.entities.users;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,6 +12,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.empsi.entities.AbsenceEtudiant;
+import com.empsi.entities.Classe;
 
 @Entity
 public class Etudiant extends Utilisateur implements Serializable  {

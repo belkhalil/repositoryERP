@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.empsi.dao.CompteRepository;
-import com.empsi.entities.Compte;
+import com.empsi.entities.users.Compte;
 
 @Service
 public class CompteMetierImpl implements ICompteMetier{

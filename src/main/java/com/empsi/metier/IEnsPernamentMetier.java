@@ -2,8 +2,7 @@ package com.empsi.metier;
 
 import java.util.List;
 
-
-import com.empsi.entities.EnsPermanent;
+import com.empsi.entities.users.EnsPermanent;
 
 public interface IEnsPernamentMetier {
 	

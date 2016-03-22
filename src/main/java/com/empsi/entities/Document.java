@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.empsi.entities.users.Utilisateur;
+
 @Entity
 public class Document implements Serializable{
 

@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.empsi.entities.users.Utilisateur;
 @Entity
 public class Historique implements Serializable{
 

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.empsi.dao.EnsPermanentRepository;
-import com.empsi.entities.EnsPermanent;
+import com.empsi.entities.users.EnsPermanent;
 
 @Service
 public class EnsPermanentMetierImpl implements IEnsPernamentMetier {
