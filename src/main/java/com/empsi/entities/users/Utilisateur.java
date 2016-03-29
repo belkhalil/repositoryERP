@@ -18,6 +18,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.empsi.entities.Declaration;
 import com.empsi.entities.Document;
@@ -41,6 +45,8 @@ public abstract class Utilisateur implements Serializable{
 	private String prenomUtilisateur;
 	private String cinUtilisateur;
 	private String emailUtilisateur;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat (pattern="YYYY-MMM-dd")
 	private Date dateNaissance;
 	private String villeNaissance;
 	private String paysNaissance;

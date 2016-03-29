@@ -1,28 +1,29 @@
-var app=angular.module("MyApp",[]);
+var app=angular.module("appEnsp",[]);
 
-app.factory('EtudiantService', ['$http', '$q', function($http, $q){
+app.factory('EnsPService', ['$http', '$q', function($http, $q){
 	 
     return {
-    	    getOneStudent: function(id){
-    	    	return $http.get("/getOneStudent/"+id)
+    	    getOneEnsp: function(id){
+    	    	return $http.get("/getOneEnsp/"+id)
     	    	.then(
                                     function(response){
                                         return response.data;
                                     }, 
                                     function(errResponse){
-                                        console.error('Error while fetching etudiant');
+                                        console.error('Error while fetching ensp');
                                         return $q.reject(errResponse);
                                     }
     	    	);
     	    },
-            fetchAllStudents: function() {
-                    return $http.get("/students")
+    	   
+            fetchEnsps: function() {
+                    return $http.get("/ensPermanents")
                             .then(
                                     function(response){
                                         return response.data;
                                     }, 
                                     function(errResponse){
-                                        console.error('Error while fetching etudiants');
+                                        console.error('Error while fetching ensp');
                                         return $q.reject(errResponse);
                                     }
                             );
@@ -30,21 +31,21 @@ app.factory('EtudiantService', ['$http', '$q', function($http, $q){
             
             
              
-            createStudent: function(etudiant){
-                    return $http.post("/save", etudiant)
+            createEnsp: function(ensp){
+                    return $http.post("/saveEnsp", ensp)
                             .then(
                                     function(response){
                                         return response.data;
                                     }, 
                                     function(errResponse){
-                                        console.error('Error while creating user');
+                                        console.error('Error while creating ensp');
                                         return $q.reject(errResponse);
                                     }
                             );
             },
              
-            updateStudent: function(etudiant, id){
-                    return $http.put("/updateStudent/"+id, etudiant)
+            updateEnsp: function(ensP, id){
+                    return $http.put("/updateEnsP/"+id, ensP)
                             .then(
                                     function(response){
                                         return response.data;
@@ -56,51 +57,47 @@ app.factory('EtudiantService', ['$http', '$q', function($http, $q){
                             );
             },
              
-            deleteStudent: function(id){
-                    return $http.delete("/deleteStudent/"+id)
+            deleteEnsp: function(id){
+                    return $http.delete("/deleteEnsP/"+id)
                             .then(
                                     function(response){
                                         return response.data;
                                     }, 
                                     function(errResponse){
-                                        console.error('Error while deleting student');
+                                        console.error('Error while deleting ensp');
                                         return $q.reject(errResponse);
                                     }
                             );
             }
          
     };
-    
-   
-    
- 
+     
 }]);
 
-app.controller('EtudiantController', ['$scope', 'EtudiantService', function($scope, EtudiantService) {
+app.controller('EnsPController', ['$scope', 'EnsPService', function($scope, EnsPService) {
     var self = this;
-    self.etudiant={idUtilisateur:null,cinUtilisateur:'',cne:'',nomUtilisateur:'',prenomUtilisateur:'',dateNaissance:'', adresseUtilisateur:'',emailUtilisateur:''};
-    self.etudiantshow={idUtilisateur:null,cinUtilisateur:'',cne:'',nomUtilisateur:'',prenomUtilisateur:'',dateNaissance:'', adresseUtilisateur:'',emailUtilisateur:''};
-    self.etudiants=[];
+    self.ensp={idUtilisateur:null,cinUtilisateur:'',nomUtilisateur:'',prenomUtilisateur:'', adresseUtilisateur:'',emailUtilisateur:''};
+    self.enspshow={idUtilisateur:null,cinUtilisateur:'',nomUtilisateur:'',prenomUtilisateur:'', adresseUtilisateur:'',emailUtilisateur:''};
+    self.ensps=[];
     $scope.showMe = false;
-    self.getOneStudent = function(id){
-    	EtudiantService.getOneStudent(id)
+    self.getOneEnsp = function(id){
+    	EnsPService.getOneEnsp(id)
     	 .then(
                 function(d) {
-                     self.etudiantshow = d;
-                     console.log(self.etudiantshow);
-                },
+                     self.enspshow = d;
+                         },
                  function(errResponse){
                      console.error('Error while fetching Currencies');
                  }
         );
     };
     
-    self.fetchAllStudents = function(){
-    	EtudiantService.fetchAllStudents()
+    self.fetchEnsps = function(){
+    	EnsPService.fetchEnsps()
             .then(
                          function(d) {
-                              self.etudiants = d;
-                              
+                              self.ensps = d;  
+                   
                          },
                           function(errResponse){
                               console.error('Error while fetching Currencies');
@@ -109,58 +106,51 @@ app.controller('EtudiantController', ['$scope', 'EtudiantService', function($sco
     };
     
     
-      
-    self.createStudent = function(){
-    	EtudiantService.createStudent(self.etudiant)
+    self.createEnsp = function(){
+    	EnsPService.createEnsp(self.ensp)
                 .then(
-                self.fetchAllStudents, 
+                self.fetchEnsps, 
                         function(errResponse){
-                             console.error('Error while creating User.');
+                             console.error('Error while creating ensp.');
                         } 
             );
     };
 
-   self.updateStudent = function(etudiant, id){
-	   EtudiantService.updateStudent(etudiant, id)
+   self.updateEnsp = function(ensp, id){
+	   EnsPService.updateEnsp(ensp, id)
                 .then(
-                        self.fetchAllStudents, 
+                        self.fetchEnsps, 
                         function(errResponse){
-                             console.error('Error while updating User.');
+                             console.error('Error while updating ensp.');
                         } 
             );
     };
 
-   self.deleteStudent = function(id){
-	   EtudiantService.deleteStudent(id)
+   self.deleteEnsp = function(id){
+	   EnsPService.deleteEnsp(id)
                 .then(
-                        self.fetchAllStudents, 
+                        self.fetchEnsps, 
                         function(errResponse){
-                             console.error('Error while deleting student.');
+                             console.error('Error while deleting ensp.');
                         } 
             );
     };
 
-    self.fetchAllStudents();
+    self.fetchEnsps();
     
     self.update = function(){
-    	console.log('updating d\'un etudiant'+self.etudiant.idUtilisateur);
-    	self.updateStudent(self.etudiant, self.etudiant.idUtilisateur);
+    	console.log('updating d\'un ensp'+self.ensp.idUtilisateur);
+    	self.updateEnsp(self.ensp, self.ensp.idUtilisateur);
     	self.reset();
     };
     
     self.add=function(){
-    	if(self.etudiant.idUtilisateur===null){
-            console.log('Saving New student', self.etudiant);
-         // 
-            var st1=self.etudiant.dateNaissance;
-            var dateN = new Date(st1);
-            
-            self.etudiant.dateDebut=dateN;
-            
-            self.createStudent(self.etudiant);
+    	if(self.ensp.idUtilisateur===null){
+            console.log('Saving New student', self.ensp);    
+            self.createEnsp(self.ensp);
         }else{
-            self.updateStudent(self.etudiant, self.etudiant.idUtilisateur);
-            console.log('student updated with id ', self.etudiant.idUtilisateur);
+            self.updateEnsp(self.ensp, self.ensp.idUtilisateur);
+            console.log('ensp updated with id ', self.ensp.idUtilisateur);
         }
         self.reset();
     };
@@ -168,7 +158,7 @@ app.controller('EtudiantController', ['$scope', 'EtudiantService', function($sco
 //    self.submit = function() {
 //        if(self.etudiant.id===null){
 //            console.log('Saving New student', self.etudiant);    
-//            self.createStudent(self.etudiant);
+//            self.createEnsp(self.etudiant);
 //        }else{
 //            self.updateStudent(self.etudiant, self.etudiant.id);
 //            console.log('student updated with id ', self.etudiant.id);
@@ -177,26 +167,26 @@ app.controller('EtudiantController', ['$scope', 'EtudiantService', function($sco
 //    };
          
     self.edit = function(id){
-        for(var i = 0; i < self.etudiants.length; i++){
-            if(self.etudiants[i].idUtilisateur == id) {
-               self.etudiant = angular.copy(self.etudiants[i]);
+        for(var i = 0; i < self.ensps.length; i++){
+            if(self.ensps[i].idUtilisateur == id) {
+               self.ensp = angular.copy(self.ensps[i]);
                break;
             }
         }
     };
-         
+    
     self.remove = function(id){
         console.log('id to be deleted', id);
-        self.deleteStudent(id);
+        self.deleteEnsp(id);
     };
 
      self.show=function(id){
-    	 self.getOneStudent(id);
+    	 self.getOneEnsp(id);
     	 $scope.showMe = !$scope.showMe;
      };
      
     self.reset = function(){
-        self.etudiant={idUtilisateur:null,cinUtilisateur:'',cne:'',nomUtilisateur:'',prenomUtilisateur:'',dateNaissance:'', adresseUtilisateur:'',emailUtilisateur:''};
+        self.ensp={idUtilisateur:null,cinUtilisateur:'',nomUtilisateur:'',prenomUtilisateur:'', adresseUtilisateur:'',emailUtilisateur:''};
         $scope.myForm.$setPristine(); //reset Form
     };
 

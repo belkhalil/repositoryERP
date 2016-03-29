@@ -6,9 +6,13 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -19,14 +23,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
-public class Formation implements Serializable{
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+public abstract class Formation implements Serializable{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.TABLE)
 	@Column(name="idFormation")
 	private Long idFormation;
 	private String nomFormation;
@@ -41,6 +46,11 @@ public class Formation implements Serializable{
 	private Date dateFin;
 	
 	private double prix;
+	
+	@Enumerated(EnumType.STRING)
+	private typeFormation typeFormation;
+	
+	
 	@OneToMany(mappedBy = "formation")
     private List<Inscription> inscriptions;
 	@ManyToMany(mappedBy = "formations")
@@ -93,13 +103,22 @@ public class Formation implements Serializable{
 	public void setModules(List<Module> modules) {
 		this.modules = modules;
 	}
-	public Formation(String nomFormation, String descFormation, Date dateDebut, Date dateFin, double prix) {
+	
+	public typeFormation getTypeFormation() {
+		return typeFormation;
+	}
+	public void setTypeFormation(typeFormation typeFormation) {
+		this.typeFormation = typeFormation;
+	}
+	
+	public Formation(String nomFormation, String descFormation, Date dateDebut, Date dateFin, double prix,typeFormation typeFormation) {
 		super();
 		this.nomFormation = nomFormation;
 		this.descFormation = descFormation;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
 		this.prix = prix;
+		this.typeFormation=typeFormation;
 	}
 	public Formation() {
 		super();

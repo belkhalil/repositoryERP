@@ -16,7 +16,7 @@ public class EnsPermanentMetierImpl implements IEnsPernamentMetier {
 
 	@Override
 	public EnsPermanent get(Long id) {
-		return ensPermanentRepository.getOne(id);
+		return ensPermanentRepository.findOne(id);
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class EnsVacataireMetierImpl  implements IEnsVacataireMetier{
 
 	@Override
 	public EnsVacataire get(Long id) {
-		return ensVacataireRepository.getOne(id);
+		return ensVacataireRepository.findOne(id);
 	}
 
 	@Override

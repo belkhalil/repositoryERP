@@ -1,28 +1,29 @@
-var app=angular.module("MyApp",[]);
+var app=angular.module("appEnsv",[]);
 
-app.factory('EtudiantService', ['$http', '$q', function($http, $q){
+app.factory('ensvService', ['$http', '$q', function($http, $q){
 	 
     return {
-    	    getOneStudent: function(id){
-    	    	return $http.get("/getOneStudent/"+id)
+    	    getOneEnsv: function(id){
+    	    	return $http.get("/getOneEnsv/"+id)
     	    	.then(
                                     function(response){
                                         return response.data;
                                     }, 
                                     function(errResponse){
-                                        console.error('Error while fetching etudiant');
+                                        console.error('Error while fetching ensv');
                                         return $q.reject(errResponse);
                                     }
     	    	);
     	    },
-            fetchAllStudents: function() {
-                    return $http.get("/students")
+    	   
+            fetchEnsvs: function() {
+                    return $http.get("/ensVacatires")
                             .then(
                                     function(response){
                                         return response.data;
                                     }, 
                                     function(errResponse){
-                                        console.error('Error while fetching etudiants');
+                                        console.error('Error while fetching ensv');
                                         return $q.reject(errResponse);
                                     }
                             );
@@ -30,64 +31,61 @@ app.factory('EtudiantService', ['$http', '$q', function($http, $q){
             
             
              
-            createStudent: function(etudiant){
-                    return $http.post("/save", etudiant)
+            createEnsv: function(ensv){
+                    return $http.post("/saveEnsv", ensv)
                             .then(
                                     function(response){
                                         return response.data;
                                     }, 
                                     function(errResponse){
-                                        console.error('Error while creating user');
+                                        console.error('Error while creating ensv');
                                         return $q.reject(errResponse);
                                     }
                             );
             },
              
-            updateStudent: function(etudiant, id){
-                    return $http.put("/updateStudent/"+id, etudiant)
+            updateEnsv: function(ensv, id){
+                    return $http.put("/updateEnsV/"+id, ensv)
                             .then(
                                     function(response){
                                         return response.data;
                                     }, 
                                     function(errResponse){
-                                        console.error('Error while updating user');
+                                        console.error('Error while updating ensv');
                                         return $q.reject(errResponse);
                                     }
                             );
             },
              
-            deleteStudent: function(id){
-                    return $http.delete("/deleteStudent/"+id)
+            deleteEnsv: function(id){
+                    return $http.delete("/deleteEnsV/"+id)
                             .then(
                                     function(response){
                                         return response.data;
                                     }, 
                                     function(errResponse){
-                                        console.error('Error while deleting student');
+                                        console.error('Error while deleting ensv');
                                         return $q.reject(errResponse);
                                     }
                             );
             }
          
     };
-    
-   
-    
- 
+     
 }]);
 
-app.controller('EtudiantController', ['$scope', 'EtudiantService', function($scope, EtudiantService) {
+app.controller('ensvController', ['$scope', 'ensvService', function($scope, ensvService) {
     var self = this;
-    self.etudiant={idUtilisateur:null,cinUtilisateur:'',cne:'',nomUtilisateur:'',prenomUtilisateur:'',dateNaissance:'', adresseUtilisateur:'',emailUtilisateur:''};
-    self.etudiantshow={idUtilisateur:null,cinUtilisateur:'',cne:'',nomUtilisateur:'',prenomUtilisateur:'',dateNaissance:'', adresseUtilisateur:'',emailUtilisateur:''};
-    self.etudiants=[];
+    self.ensv={idUtilisateur:null,cinUtilisateur:'',nomUtilisateur:'',prenomUtilisateur:'', adresseUtilisateur:'',emailUtilisateur:''};
+    self.ensvshow={idUtilisateur:null,cinUtilisateur:'',nomUtilisateur:'',prenomUtilisateur:'', adresseUtilisateur:'',emailUtilisateur:''};
+    self.ensvs=[];
     $scope.showMe = false;
-    self.getOneStudent = function(id){
-    	EtudiantService.getOneStudent(id)
+    self.getOneEnsv = function(id){
+    	ensvService.getOneEnsv(id)
     	 .then(
                 function(d) {
-                     self.etudiantshow = d;
-                     console.log(self.etudiantshow);
+                     self.ensvshow = d;
+                     console.log("hada hhhhhhhhh:"+self.ensvshow);
                 },
                  function(errResponse){
                      console.error('Error while fetching Currencies');
@@ -95,12 +93,12 @@ app.controller('EtudiantController', ['$scope', 'EtudiantService', function($sco
         );
     };
     
-    self.fetchAllStudents = function(){
-    	EtudiantService.fetchAllStudents()
+    self.fetchEnsvs = function(){
+    	ensvService.fetchEnsvs()
             .then(
                          function(d) {
-                              self.etudiants = d;
-                              
+                              self.ensvs = d;  
+                   
                          },
                           function(errResponse){
                               console.error('Error while fetching Currencies');
@@ -109,58 +107,51 @@ app.controller('EtudiantController', ['$scope', 'EtudiantService', function($sco
     };
     
     
-      
-    self.createStudent = function(){
-    	EtudiantService.createStudent(self.etudiant)
+    self.createEnsv = function(){
+    	ensvService.createEnsv(self.ensv)
                 .then(
-                self.fetchAllStudents, 
+                self.fetchEnsvs, 
                         function(errResponse){
-                             console.error('Error while creating User.');
+                             console.error('Error while creating ensv.');
                         } 
             );
     };
 
-   self.updateStudent = function(etudiant, id){
-	   EtudiantService.updateStudent(etudiant, id)
+   self.updateEnsv = function(ensv, id){
+	   ensvService.updateEnsv(ensv, id)
                 .then(
-                        self.fetchAllStudents, 
+                        self.fetchEnsvs, 
                         function(errResponse){
-                             console.error('Error while updating User.');
+                             console.error('Error while updating ensv.');
                         } 
             );
     };
 
-   self.deleteStudent = function(id){
-	   EtudiantService.deleteStudent(id)
+   self.deleteEnsv = function(id){
+	   ensvService.deleteEnsv(id)
                 .then(
-                        self.fetchAllStudents, 
+                        self.fetchEnsvs, 
                         function(errResponse){
-                             console.error('Error while deleting student.');
+                             console.error('Error while deleting ensv.');
                         } 
             );
     };
 
-    self.fetchAllStudents();
+    self.fetchEnsvs();
     
     self.update = function(){
-    	console.log('updating d\'un etudiant'+self.etudiant.idUtilisateur);
-    	self.updateStudent(self.etudiant, self.etudiant.idUtilisateur);
+    	console.log('updating d\'un ensv'+self.ensv.idUtilisateur);
+    	self.updateEnsv(self.ensv, self.ensv.idUtilisateur);
     	self.reset();
     };
     
     self.add=function(){
-    	if(self.etudiant.idUtilisateur===null){
-            console.log('Saving New student', self.etudiant);
-         // 
-            var st1=self.etudiant.dateNaissance;
-            var dateN = new Date(st1);
-            
-            self.etudiant.dateDebut=dateN;
-            
-            self.createStudent(self.etudiant);
+    	if(self.ensv.idUtilisateur===null){
+            console.log('Saving New student', self.ensv);    
+            self.createEnsv(self.ensv);
         }else{
-            self.updateStudent(self.etudiant, self.etudiant.idUtilisateur);
-            console.log('student updated with id ', self.etudiant.idUtilisateur);
+            self.updateEnsv(self.ensv, self.ensv.idUtilisateur);
+            console.log('ensv updated with id ', self.ensv.idUtilisateur);
         }
         self.reset();
     };
@@ -168,7 +159,7 @@ app.controller('EtudiantController', ['$scope', 'EtudiantService', function($sco
 //    self.submit = function() {
 //        if(self.etudiant.id===null){
 //            console.log('Saving New student', self.etudiant);    
-//            self.createStudent(self.etudiant);
+//            self.createEnsv(self.etudiant);
 //        }else{
 //            self.updateStudent(self.etudiant, self.etudiant.id);
 //            console.log('student updated with id ', self.etudiant.id);
@@ -177,26 +168,26 @@ app.controller('EtudiantController', ['$scope', 'EtudiantService', function($sco
 //    };
          
     self.edit = function(id){
-        for(var i = 0; i < self.etudiants.length; i++){
-            if(self.etudiants[i].idUtilisateur == id) {
-               self.etudiant = angular.copy(self.etudiants[i]);
+        for(var i = 0; i < self.ensvs.length; i++){
+            if(self.ensvs[i].idUtilisateur == id) {
+               self.ensv = angular.copy(self.ensvs[i]);
                break;
             }
         }
     };
-         
+    
     self.remove = function(id){
         console.log('id to be deleted', id);
-        self.deleteStudent(id);
+        self.deleteEnsv(id);
     };
 
      self.show=function(id){
-    	 self.getOneStudent(id);
+    	 self.getOneEnsv(id);
     	 $scope.showMe = !$scope.showMe;
      };
      
     self.reset = function(){
-        self.etudiant={idUtilisateur:null,cinUtilisateur:'',cne:'',nomUtilisateur:'',prenomUtilisateur:'',dateNaissance:'', adresseUtilisateur:'',emailUtilisateur:''};
+        self.ensv={idUtilisateur:null,cinUtilisateur:'',nomUtilisateur:'',prenomUtilisateur:'', adresseUtilisateur:'',emailUtilisateur:''};
         $scope.myForm.$setPristine(); //reset Form
     };
 

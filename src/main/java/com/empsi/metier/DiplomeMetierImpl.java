@@ -14,7 +14,7 @@ public class DiplomeMetierImpl implements IDiplomeMetier {
 	@Override
 	public Diplome get(Long id) {
 		
-		return diplomeRepository.getOne(id);
+		return diplomeRepository.findOne(id);
 	}
 
 	@Override
