@@ -53,8 +53,10 @@ public abstract class Formation implements Serializable{
 	
 	@OneToMany(mappedBy = "formation")
     private List<Inscription> inscriptions;
+	
 	@ManyToMany(mappedBy = "formations")
     private List<Module> modules;
+	
 	public Long getIdFormation() {
 		return idFormation;
 	}

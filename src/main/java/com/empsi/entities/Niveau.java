@@ -28,9 +28,10 @@ public class Niveau implements Serializable {
 	private String nomNiveau;
 	//deug,licence,master
 	private String labelNiveau;
-
+    
 	@OneToMany(mappedBy = "niveau")
 	private List<Semestre> semestres;
+	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "Niveau_formation", joinColumns = {
 			@JoinColumn(name = "idNiveau", nullable = false, updatable = false) }, inverseJoinColumns = {
