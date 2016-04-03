@@ -47,9 +47,9 @@ public abstract class Formation implements Serializable{
 	
 	private double prix;
 	
-	@Enumerated(EnumType.STRING)
-	private typeFormation typeFormation;
 	
+	@OneToMany(mappedBy = "formation")
+    private List<TypeFormaton> typeFormations;
 	
 	@OneToMany(mappedBy = "formation")
     private List<Inscription> inscriptions;
@@ -57,6 +57,13 @@ public abstract class Formation implements Serializable{
 	@ManyToMany(mappedBy = "formations")
     private List<Module> modules;
 	
+	
+	public List<TypeFormaton> getTypeFormations() {
+		return typeFormations;
+	}
+	public void setTypeFormations(List<TypeFormaton> typeFormations) {
+		this.typeFormations = typeFormations;
+	}
 	public Long getIdFormation() {
 		return idFormation;
 	}
@@ -106,21 +113,15 @@ public abstract class Formation implements Serializable{
 		this.modules = modules;
 	}
 	
-	public typeFormation getTypeFormation() {
-		return typeFormation;
-	}
-	public void setTypeFormation(typeFormation typeFormation) {
-		this.typeFormation = typeFormation;
-	}
 	
-	public Formation(String nomFormation, String descFormation, Date dateDebut, Date dateFin, double prix,typeFormation typeFormation) {
+	public Formation(String nomFormation, String descFormation, Date dateDebut, Date dateFin, double prix) {
 		super();
 		this.nomFormation = nomFormation;
 		this.descFormation = descFormation;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
 		this.prix = prix;
-		this.typeFormation=typeFormation;
+		
 	}
 	public Formation() {
 		super();

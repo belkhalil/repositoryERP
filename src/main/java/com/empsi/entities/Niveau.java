@@ -28,15 +28,17 @@ public class Niveau implements Serializable {
 	private String nomNiveau;
 	//deug,licence,master
 	private String labelNiveau;
-    
+	private double prix;
+	
 	@OneToMany(mappedBy = "niveau")
 	private List<Semestre> semestres;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "Niveau_formation", joinColumns = {
-			@JoinColumn(name = "idNiveau", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "idFormation", nullable = false, updatable = false) })
-	private List<Formation> formations;
+//	@ManyToMany()
+//	@JoinTable(name = "Niveau_formation", joinColumns = {
+//			@JoinColumn(name = "idNiveau",  updatable = false) }, inverseJoinColumns = {
+//					@JoinColumn(name = "idFormation", updatable = false) })
+     @ManyToMany(targetEntity=Formation.class)
+         private List<Formation> formations;
 
 	public Niveau() {
 		super();
@@ -46,6 +48,22 @@ public class Niveau implements Serializable {
 	public Niveau(String nomNiveau) {
 		super();
 		this.nomNiveau = nomNiveau;
+	}
+
+	public double getPrix() {
+		return prix;
+	}
+
+	public void setPrix(double prix) {
+		this.prix = prix;
+	}
+
+	public List<Semestre> getSemestres() {
+		return semestres;
+	}
+
+	public void setSemestres(List<Semestre> semestres) {
+		this.semestres = semestres;
 	}
 
 	public Long getIdNiveau() {
@@ -59,7 +77,7 @@ public class Niveau implements Serializable {
 	public String getNomNiveau() {
 		return nomNiveau;
 	}
-
+  
 	public void setNomNiveau(String nomNiveau) {
 		this.nomNiveau = nomNiveau;
 	}

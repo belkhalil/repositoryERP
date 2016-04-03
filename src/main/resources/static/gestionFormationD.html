@@ -9,6 +9,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script src="js/moduls/FormaDApp.js"></script>
+<script src="js/services/TypeFormationService.js"></script>
 <script src="js/services/FormationDServices.js"></script>
 <script src="js/controllers/FormationDiplomanteController.js"></script>
 </head>
@@ -85,23 +86,18 @@
 									</div>
 								</div>
 							</div>
-							<div class="row form-inline">
+							<div class="row">
 								<div class="form-group col-md-12">
 									<label class="col-md-2 control-lable" for=""></label>
-									<div class="checkbox col-md-2">
-										<label> <input type="checkbox"> cours du soir
-										</label>
-									</div>
-									<div class="checkbox  col-md-2">
-										<label> <input type="checkbox"> cours du jour
-										</label>
-									</div>
-									<div class="checkbox col-md-2">
-										<label> <input type="checkbox"> cours week end
-										</label>
+									<div class="col-md-7">
+										<select class="form-control input-sm" ng-model="ctrl.idtypeFormation" >
+								<option ng-repeat="t in ctrl.typeFormations" value="{{t.idTypeFormation}}">{{t.labelTypeFormation}}</option>
+ 	                              </select>
+
 									</div>
 								</div>
 							</div>
+							
 
                    <br>
 
@@ -124,7 +120,7 @@
 				<div class="panel panel-default">
 					<!-- Default panel contents -->
 					<div class="panel-heading">
-						<span class="lead">List des formations Continues </span>
+						<span class="lead">List des formations diplomante </span>
 					</div>
 					<div class="tablecontainer">
 						<table class="table table-hover">
@@ -135,6 +131,7 @@
 									<th>date de debut</th>
 									<th>date de fin</th>
 									<th>description</th>
+									<th>type de formation</th>
 
 
 
@@ -146,7 +143,12 @@
 									<td>{{e.dateDebut}}</td>
 									<td>{{e.dateFin}}</td>
 									<td>{{e.descFormation}}</td>
+                                    <td>
+                                    <ul>
+                                       <li >  </li>
+                                     </ul>
 
+                                    </td>
 
 									<td>
 										<button type="button" ng-click="ctrl.edit(e.idFormation)"

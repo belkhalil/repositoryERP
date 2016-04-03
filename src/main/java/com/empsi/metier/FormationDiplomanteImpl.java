@@ -6,13 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.empsi.dao.FormatinDiplomanteRepository;
+import com.empsi.dao.TypeFormationRepository;
 import com.empsi.entities.FormationDiplomante;
+import com.empsi.entities.TypeFormaton;
 
 @Service
 public class FormationDiplomanteImpl implements IFormationDiplomanteMetier {
 
 	@Autowired
 	FormatinDiplomanteRepository formatinDiplomanteRepository;
+	@Autowired
+	TypeFormationRepository typeFormationRepository;
 	
 	@Override
 	public FormationDiplomante get(Long id) {
@@ -38,6 +42,14 @@ public class FormationDiplomanteImpl implements IFormationDiplomanteMetier {
 	@Override
 	public boolean delete(Long id) {
 		formatinDiplomanteRepository.delete(id);
+		return true;
+	}
+
+	@Override
+	public boolean addTypeToFormation(Long idT, Long idF) {
+		TypeFormaton type= typeFormationRepository.findOne(idT);
+		FormationDiplomante formation = formatinDiplomanteRepository.findOne(idF);
+		formation.getTypeFormations().add(type);
 		return true;
 	}
 

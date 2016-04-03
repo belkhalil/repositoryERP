@@ -68,15 +68,26 @@ public class NiveauController {
 	     niveauMetierImpl.delete(id);
 	     return true;
 	}
-
+/**
+ * 
+ * @param id
+ * @param n
+ * @return
+ */
 	@RequestMapping(value="/updateNiveau/{id}" ,method = RequestMethod.PUT)
 	public Niveau updateNiveaut(@PathVariable("id") Long id,@RequestBody Niveau n)
 	{
 		niveauMetierImpl.update(n);
 		return n;
 		}
+		/**
+		 * 
+		 * @param idN
+		 * @param idF
+		 * @return
+		 */
 	@RequestMapping(value="/addFormationToNiveau" ,method = RequestMethod.POST)
-	public boolean addFormationToNiveau(@RequestParam(value="idN") Long idN,@RequestParam(value="idF") Long idF)
+	public boolean addFormationToNiveau(@RequestParam(value="idn") Long idN ,@RequestParam(value="idf") Long idF)
 	{
 		return niveauMetierImpl.addFormationToNiveau(idF, idN);
 		

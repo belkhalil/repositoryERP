@@ -20,14 +20,14 @@ public class FormationContinu extends Formation implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FormationContinu(String nomFormation, String descFormation, Date dateDebut, Date dateFin, double prix, typeFormation typeFormation) {
-		super(nomFormation, descFormation, dateDebut, dateFin, prix, typeFormation);
+	public FormationContinu(String nomFormation, String descFormation, Date dateDebut, Date dateFin, double prix) {
+		super(nomFormation, descFormation, dateDebut, dateFin, prix);
 		// TODO Auto-generated constructor stub
 	}
 
 	public FormationContinu(String nomFormation, String descFormation, Date dateDebut, Date dateFin, double prix,
-			Long dure, typeFormation typeFormation) {
-		super(nomFormation, descFormation, dateDebut, dateFin, prix, typeFormation);
+			Long dure) {
+		super(nomFormation, descFormation, dateDebut, dateFin, prix);
 		this.dure = dure;
 	}
 

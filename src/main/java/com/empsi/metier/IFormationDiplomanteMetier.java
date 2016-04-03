@@ -10,4 +10,5 @@ public interface IFormationDiplomanteMetier {
 	public FormationDiplomante save(FormationDiplomante formation);
 	public FormationDiplomante update(FormationDiplomante formation);
 	public boolean delete(Long id);
+	public boolean addTypeToFormation(Long idT,Long idF);
 }

@@ -56,6 +56,8 @@ public class NiveauMetierImpl implements INiveauMetier {
 		 Niveau niveau = niveauRepository.findOne(idNiveau);
 		 niveau.getFormations().add(formation);
 		 niveauRepository.saveAndFlush(niveau);
+		 
+		 
 		 return true;
 		 
 		 

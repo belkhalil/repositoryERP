@@ -1,10 +1,11 @@
 
 
-app.controller('formationDiplomanteController', ['$scope', 'FormationDService', function($scope, FormationDService) {
+app.controller('formationDiplomanteController', ['$scope', 'FormationDService','typeFormationService', function($scope, FormationDService,typeFormationService) {
     var self = this;
     self.formation={idFormation:null,nomFormation:'',dateDebut:'',dateFin:'',descFormation:'',dure:''};
     self.formationshow={idFormation:null,nomFormation:'',dateDebut:'',dateFin:'',descFormation:'',dure:''};
     self.formations=[];
+    self.typeFormations=[];
     $scope.showMe = false;
     self.getOneFormation = function(id){
     	FormationDService.getOneFormation(id)
@@ -33,6 +34,15 @@ app.controller('formationDiplomanteController', ['$scope', 'FormationDService', 
                  );
     };
     
+    self.getAlltypeFormations= function() {
+		  	
+    	typeFormationService.fetchAllTypeFormations().then(function(d) {
+			self.typeFormations = d;
+
+		}, function(errResponse) {
+			console.error('Error while fetching Currencies');
+		});
+    };
     
       
     self.createFormation = function(){
@@ -65,7 +75,7 @@ app.controller('formationDiplomanteController', ['$scope', 'FormationDService', 
             );
     };
 
-    self.fetchAllFormations();
+    
     
     self.update = function(){
     	console.log('updating d\'une formation'+self.formation.idFormation);
@@ -131,5 +141,6 @@ app.controller('formationDiplomanteController', ['$scope', 'FormationDService', 
         self.formation={idFormation:null,nomFormation:'',dateDebut:'',dateFin:'',descFormation:'',dure:''};
         $scope.myForm.$setPristine(); // reset Form
     };
-
+    self.fetchAllFormations();
+    self.getAlltypeFormations();
 }]);

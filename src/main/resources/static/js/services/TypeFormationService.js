@@ -2,87 +2,71 @@
  * 
  */
 'use strict';
-app.factory('NiveauService', ['$http', '$q', function($http, $q){
-	 
+app.factory('typeFormationService', ['$http', '$q', function($http, $q){
     return {
-    	    getOneNiveau: function(id){
-    	    	return $http.get("/getOneNiveau/"+id)
+    	getOneTypeFormation: function(id){
+    	    	return $http.get("/getOneTypeFormation/"+id)
     	    	.then(
                                     function(response){
                                         return response.data;
                                     }, 
                                     function(errResponse){
-                                        console.error('Error while fetching niveau');
+                                        console.error('Error while fetching les types');
                                         return $q.reject(errResponse);
                                     }
     	    	);
     	    },
-    	    
-            fetchAllNiveaux: function() {
-                    return $http.get("/niveaux")
+            fetchAllTypeFormations: function() {
+                    return $http.get("/typeFormations")
                             .then(
                                     function(response){
                                         return response.data;
                                     }, 
                                     function(errResponse){
-                                        console.error('Error while fetching niveaux');
+                                        console.error('Error while fetching types');
                                         return $q.reject(errResponse);
                                     }
                             );
             },
             
-            createNiveau: function(niveau){
-                    return $http.post("/saveNiveau", niveau)
+            createTypeFormation: function(typeFormation){
+                    return $http.post("/savetypeFormation", typeFormation)
                             .then(
                                     function(response){
                                     	
                                         return response.data;
                                     }, 
                                     function(errResponse){
-                                        console.error('Error while creating niveau');
+                                        console.error('Error while creating type f');
                                         return $q.reject(errResponse);
                                     }
                             );
             },
              
-            updateNiveau: function(niveau, id){
-                    return $http.put("/updateNiveau/"+id, niveau)
+            updateTypeFormation: function(typeFormation, id){
+                    return $http.put("/updateTypeFormation/"+id, typeFormation)
                             .then(
                                     function(response){
                                         return response.data;
                                     }, 
                                     function(errResponse){
-                                        console.error('Error while updating niveau');
+                                        console.error('Error while updating type f');
                                         return $q.reject(errResponse);
                                     }
                             );
             },
              
-            deleteNiveau: function(id){
-                    return $http.delete("/deleteNiveau/"+id)
+            deleteTypeFormation: function(id){
+                    return $http.delete("/deleteTypeFormation/"+id)
                             .then(
                                     function(response){
                                         return response.data;
                                     }, 
                                     function(errResponse){
-                                        console.error('Error while deleting niveau');
+                                        console.error('Error while deleting type f ');
                                         return $q.reject(errResponse);
                                     }
                             );
             },
-         
-    
-        addFormationToNiveau : function(idF,idN){
-    	   
-      	 return $http.post("/addFormationToNiveau/"+"?idf="+idF+"&idn="+idN)
-      	 		.then(function(response){		
-   				return response.data ;
-   				
-   			},
-   			function(errResponse){
-   				console.error('Error while adding formation to niveau');
-                return $q.reject(errResponse);
-   			});
-        }     
     };
  }]);

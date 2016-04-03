@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.empsi.entities.FormationDiplomante;
+import com.empsi.entities.TypeFormaton;
 import com.empsi.metier.FormationDiplomanteImpl;
 
 @RestController
@@ -21,6 +22,7 @@ public class FormationDiplomanteController  {
    @RequestMapping(value = "/saveformationD", method = RequestMethod.POST)
 	public FormationDiplomante addformation(@RequestBody FormationDiplomante e) {
 		formationDiplomanteImpl.save(e);
+		
 		return e;
 
 	}
