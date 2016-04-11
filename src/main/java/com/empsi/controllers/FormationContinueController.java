@@ -3,7 +3,9 @@ package com.empsi.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.empsi.entities.FormationContinu;
 import com.empsi.metier.FormationContinueMetierImpl;
 
-
 @RestController
 public class FormationContinueController {
 
@@ -21,10 +22,9 @@ public class FormationContinueController {
 	private FormationContinueMetierImpl formationContinueMetierImpl;
 
 	@RequestMapping(value = "/saveformation", method = RequestMethod.POST)
-	public FormationContinu addformation(@RequestBody FormationContinu e) {
-		formationContinueMetierImpl.save(e);
-		return e;
-
+	public ResponseEntity<FormationContinu> addformation(@RequestBody FormationContinu f) {
+		formationContinueMetierImpl.save(f);
+		return new ResponseEntity<FormationContinu>(f, HttpStatus.CREATED);
 	}
 
 	/**
@@ -33,11 +33,12 @@ public class FormationContinueController {
 	 * @return
 	 */
 	@RequestMapping(value = "/getOneFormation/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public FormationContinu getFormation(@PathVariable("id") Long id) {
-		if (formationContinueMetierImpl.get(id) != null)
-			return formationContinueMetierImpl.get(id);
-		else
-			return null;
+	public ResponseEntity<FormationContinu> getFormation(@PathVariable("id") Long id) {
+		FormationContinu f = formationContinueMetierImpl.get(id);
+		if (f == null) {
+			return new ResponseEntity<FormationContinu>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<FormationContinu>(f, HttpStatus.OK);
 	}
 
 	/**
@@ -45,9 +46,12 @@ public class FormationContinueController {
 	 * @return
 	 */
 	@RequestMapping(value = "/formations", method = RequestMethod.GET)
-	public List<FormationContinu> getAllformations() {
-
-		return formationContinueMetierImpl.getAll();
+	public ResponseEntity<List<FormationContinu>> getAllformations() {
+		List<FormationContinu> formationContinus = formationContinueMetierImpl.getAll();
+		if (formationContinus.isEmpty()) {
+			return new ResponseEntity<List<FormationContinu>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<FormationContinu>>(formationContinus, HttpStatus.OK);
 	}
 
 	/**
@@ -56,9 +60,13 @@ public class FormationContinueController {
 	 * @return
 	 */
 	@RequestMapping(value = "/deleteformation/{id}", method = RequestMethod.DELETE)
-	public boolean deleteFormation(@PathVariable("id") Long id) {
+	public ResponseEntity<FormationContinu> deleteFormation(@PathVariable("id") Long id) {
+		FormationContinu f = formationContinueMetierImpl.get(id);
+		if (f == null) {
+			return new ResponseEntity<FormationContinu>(HttpStatus.NOT_FOUND);
+		}
 		formationContinueMetierImpl.delete(id);
-		return true;
+		return new ResponseEntity<FormationContinu>(HttpStatus.NOT_FOUND);
 	}
 
 	/**
@@ -68,9 +76,10 @@ public class FormationContinueController {
 	 * @return
 	 */
 	@RequestMapping(value = "/updateFormation/{id}", method = RequestMethod.PUT)
-	public FormationContinu updateFormation(@PathVariable("id") Long id, @RequestBody FormationContinu e) {
+	public ResponseEntity<FormationContinu> updateFormation(@PathVariable("id") Long id,
+			@RequestBody FormationContinu e) {
 		formationContinueMetierImpl.update(e);
-		return e;
+		return new ResponseEntity<FormationContinu>(HttpStatus.OK);
 	}
 
 }

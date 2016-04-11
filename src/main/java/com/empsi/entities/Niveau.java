@@ -14,6 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Niveau implements Serializable {
 
@@ -26,19 +28,35 @@ public class Niveau implements Serializable {
 	private Long idNiveau;
 	// bac+1,bac+2...
 	private String nomNiveau;
-	//deug,licence,master
+	// deug,licence,master
 	private String labelNiveau;
 	private double prix;
-	
-	@OneToMany(mappedBy = "niveau")
+
+	// @OneToMany(targetEntity=Semestre.class)
+	// private List<Semestre> semestres;
+
+	// @ManyToMany()
+	// @JoinTable(name = "Niveau_formation", joinColumns = {
+	// @JoinColumn(name = "idNiveau", updatable = false) }, inverseJoinColumns =
+	// {
+	// @JoinColumn(name = "idFormation", updatable = false) })
+
+	// @ManyToMany(targetEntity=Formation.class)
+	// private List<Formation> formations;
+
+	@OneToMany()
 	private List<Semestre> semestres;
-	
-//	@ManyToMany()
-//	@JoinTable(name = "Niveau_formation", joinColumns = {
-//			@JoinColumn(name = "idNiveau",  updatable = false) }, inverseJoinColumns = {
-//					@JoinColumn(name = "idFormation", updatable = false) })
-     @ManyToMany(targetEntity=Formation.class)
-         private List<Formation> formations;
+
+	@OneToMany()
+	private List<Formation> formations;
+
+	public List<Formation> getFormations() {
+		return formations;
+	}
+
+	public void setFormations(List<Formation> formations) {
+		this.formations = formations;
+	}
 
 	public Niveau() {
 		super();
@@ -77,17 +95,9 @@ public class Niveau implements Serializable {
 	public String getNomNiveau() {
 		return nomNiveau;
 	}
-  
+
 	public void setNomNiveau(String nomNiveau) {
 		this.nomNiveau = nomNiveau;
-	}
-
-	public List<Formation> getFormations() {
-		return formations;
-	}
-
-	public void setFormations(List<Formation> formations) {
-		this.formations = formations;
 	}
 
 	public String getLabelNiveau() {

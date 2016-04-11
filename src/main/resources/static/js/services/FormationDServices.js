@@ -3,6 +3,16 @@
 app.factory('FormationDService', ['$http', '$q', function($http, $q){
 	 
     return {
+    	    addTypeToFormation : function(idT,idF){
+    	    	return $http.post("/addTypeToFormation/"+"?idt="+idT+"&idf="+idF)
+      	 		.then(function(response){		
+   				return response.data ;
+   				},
+   			function(errResponse){
+   				console.error('Error while adding type to formation');
+                return $q.reject(errResponse);
+   			});
+    	    },
     	    getOneFormation: function(id){
     	    	return $http.get("/getOneFormationD/"+id)
     	    	.then(

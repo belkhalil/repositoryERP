@@ -77,12 +77,32 @@ app.factory('NiveauService', ['$http', '$q', function($http, $q){
       	 return $http.post("/addFormationToNiveau/"+"?idf="+idF+"&idn="+idN)
       	 		.then(function(response){		
    				return response.data ;
-   				
    			},
    			function(errResponse){
-   				console.error('Error while adding formation to niveau');
+   				console.error('Error while adding formation to niveau (service)');
                 return $q.reject(errResponse);
    			});
-        }     
+        },   
+        addSemestreToNiveau : function(idS,idN){
+         	   
+             	 return $http.post("/addSemestreToNiveau/"+"?ids="+idS+"&idn="+idN)
+             	 		.then(function(response){		
+          				return response.data ;
+          			},
+          			function(errResponse){
+          				console.error('Error while adding semestre to niveau');
+                       return $q.reject(errResponse);
+          			});
+        },
+        removeFormationFromNiveau : function() {
+        	return $http.delete("/removeFormationFromNiveau/"+"?idf="+idF+"&idn="+idN)
+ 	 		.then(function(response){		
+				return response.data ;
+			},
+			function(errResponse){
+				console.error('Error while removing formation from niveau');
+           return $q.reject(errResponse);
+			});
+		}
     };
  }]);

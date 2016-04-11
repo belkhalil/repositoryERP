@@ -24,6 +24,7 @@
 			href="http://localhost:8080/gestionFormationD.html">gestion
 			formation Diplomante</a>
 			<a  href="http://localhost:8080/gestionNiveau.html"  ng-click="ctrl.allformations()">gestion des niveaux</a>
+	        <a  href="http://localhost:8080/gestionSemestre.html" >gestion des semestres</a>
 	</nav>
 	<div style="margin-left: 25%">
 		<div class="w3-container">
@@ -55,7 +56,7 @@
 								<div class="form-group col-md-12">
 									<label class="col-md-2 control-lable" for=""></label>
 									<div class="col-md-7">
-										<input type="text" datetime="yyyy-MM-dd"
+										<input type="date" datetime="yyyy-MM-dd"
 											ng-model="ctrl.formation.dateDebut" id="dateD"
 											class="form-control input-sm"
 											placeholder="date de debut de formation / yyyy-MM-dd" />
@@ -67,7 +68,7 @@
 								<div class="form-group col-md-12">
 									<label class="col-md-2 control-lable" for=""></label>
 									<div class="col-md-7">
-										<input type="text" datetime="yyyy-MM-dd"
+										<input type="date" datetime="yyyy-MM-dd"
 											ng-model="ctrl.formation.dateFin" id="dateF"
 											class="form-control input-sm"
 											placeholder="date fin de formation / yyyy-MM-dd" />
@@ -90,17 +91,15 @@
 								<div class="form-group col-md-12">
 									<label class="col-md-2 control-lable" for=""></label>
 									<div class="col-md-7">
-										<select class="form-control input-sm" ng-model="ctrl.idtypeFormation" >
-								<option ng-repeat="t in ctrl.typeFormations" value="{{t.idTypeFormation}}">{{t.labelTypeFormation}}</option>
+										<select class="form-control input-sm" ng-model="ctrl.idSelectedType" >
+										<option>type de formation</option>
+								<option ng-repeat="t in ctrl.typeFormations" value="{{t.idTypeFormation}}">{{t.labelTypeFormation}} </option>
  	                              </select>
 
 									</div>
 								</div>
 							</div>
-							
-
-                   <br>
-
+                         <br>
 							<div class="row">
 								<div class="form-group col-md-12">
 									<div class="col-md-2 control-lable"></div>
@@ -132,9 +131,6 @@
 									<th>date de fin</th>
 									<th>description</th>
 									<th>type de formation</th>
-
-
-
 								</tr>
 							</thead>
 							<tbody>
@@ -145,7 +141,7 @@
 									<td>{{e.descFormation}}</td>
                                     <td>
                                     <ul>
-                                       <li >  </li>
+                                       <li ng-repeat="t in e.typeFormations"> {{t.labelTypeFormation}} </li>
                                      </ul>
 
                                     </td>
@@ -204,9 +200,16 @@
 								</p>
 							</div>
 						</div>
-
-
-
+						<div class="form-group">
+							<label class="col-sm-2 control-label">type de formation</label>
+							<div class="col-sm-10">
+								<p class="form-control-static">
+									<ul>
+                                       <li ng-repeat="t in ctrl.formationshow.typeFormations"> {{t.labelTypeFormation}} </li>
+                                     </ul>
+								</p>
+							</div>
+						</div>
 					</form>
 				</div>
 			</div>

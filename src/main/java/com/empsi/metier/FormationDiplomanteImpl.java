@@ -47,9 +47,14 @@ public class FormationDiplomanteImpl implements IFormationDiplomanteMetier {
 
 	@Override
 	public boolean addTypeToFormation(Long idT, Long idF) {
-		TypeFormaton type= typeFormationRepository.findOne(idT);
+		TypeFormaton typef= typeFormationRepository.findOne(idT);
 		FormationDiplomante formation = formatinDiplomanteRepository.findOne(idF);
-		formation.getTypeFormations().add(type);
+        
+		
+		formation.getTypeFormations().add(typef);
+		typef.setFormation(formation);
+		formatinDiplomanteRepository.saveAndFlush(formation);
+		typeFormationRepository.saveAndFlush(typef);
 		return true;
 	}
 

@@ -2,9 +2,10 @@ app.controller('niveauController', [
 		'$scope',
 		'NiveauService',
 		'FormationDService',
+		'SemestreService',
 		'$http',
 		'$q',
-		function($scope, NiveauService, FormationDService, $http,$q) {
+		function($scope, NiveauService, FormationDService,SemestreService, $http,$q) {
 			var self = this;
 			self.niveau = {
 				idNiveau : '',
@@ -26,16 +27,23 @@ app.controller('niveauController', [
 				idFormation : null,
 				nomFormation : ''
 			};
+			self.idSelectedSemestre ='';
+			self.semestres=[];
 			self.idformation = '';
 			self.nformation = '';
 			self.idniveau='';
 			$scope.showMe = false;
-
+			
+            self.getAllsemestres=function(){
+            	SemestreService.fetchAllSemestre().then(function(d) {
+					self.semestres = d;
+				}, function(errResponse) {
+					console.error('Error while fetching Currencies');
+				});
+            };
 			self.fetchAllFormations = function() {
 				FormationDService.fetchAllFormations().then(function(d) {
 					self.formations = d;
-
-					console.error('formation a inserer:' + self.formations);
 				}, function(errResponse) {
 					console.error('Error while fetching Currencies');
 				});
@@ -66,21 +74,14 @@ app.controller('niveauController', [
 							self.niveau = d;
 			                console.log(' id de formation a ajouter:'+ self.idformation+' au niveau '+self.niveau.idNiveau);
 			                self.addFornationToNiveau(self.idformation,self.niveau.idNiveau);
+			                console.log(' id de semestre a ajouter:'+ self.idSelectedSemestre+' au niveau '+self.niveau.idNiveau);
+			                self.addSemestreToNiveau(self.idSelectedSemestre,self.niveau.idNiveau);
 						
 						}, function(errResponse) {
 							console.error('Error while creating niveau.');
 						});
 			};
-//				*
-//				  
-//				NiveauService.createNiveau(self.niveau).then(
-//						function(response) {
-//							self.niveau = response.data;
-//							self.fetchAllNiveaux();
-//						}, function(errResponse) {
-//							console.error('Error while creating niveau.');
-//						});
-		
+
 
 			self.updateNiveau = function(niveau, id) {
 				NiveauService.updateNiveau(niveau, id).then(
@@ -98,27 +99,43 @@ app.controller('niveauController', [
 
 			self.addFornationToNiveau = function(idF, idN) {
 				NiveauService.addFormationToNiveau(idF, idN).then(function(d) {
-					self.fetchAllNiveaux(); 
-					self.reset();
+						self.niveaux=d;
+					
 				},function(errResponse) {
-							console.error('Error while adding formation.');
+							console.error('Error while adding formation to niv.');
 						});
 			};
-
+			
+			self.addSemestreToNiveau = function(idS, idN) {
+				NiveauService.addSemestreToNiveau(idS, idN).then(function(d) {
+					self.niveaux=d;
+				},function(errResponse) {
+							console.error('Error while adding semestre to niveau.');
+						});
+			};
+			
+           self.removeFormationFromNiveau = function() {
+        	   NiveauService.removeFormationFromNiveau(idF,idN)
+        	   .then(
+        			   function(d){
+        				   self.niveaux=d;
+        	   },function(errResponse) {
+					console.error('Error while remouving formation from niveau.');
+				});
+		};
 			self.update = function() {
 				console.log('updating d\'un niveau' + self.niveau.idNiveau);
 				self.updateNiveau(self.niveau, self.niveau.idNiveau);
-				
 				self.addFornationToNiveau(self.idformation,self.niveau.idNiveau);
+				self.addSemestreToNiveau(self.idSelectedSemestre,self.niveau.idNiveau);
 				self.fetchAllNiveaux();
 				self.fetchAllFormations();
 				self.reset();
 			};
 			
-	
-			
 			self.add = function() {
 				self.createNiveau(self.niveau);
+				self.fetchAllFormations();
 				self.reset();
 			};
 
@@ -134,6 +151,7 @@ app.controller('niveauController', [
 			self.remove = function(id) {
 				console.log('id to be deleted', id);
 				self.deleteNiveau(id);
+				
 			};
 
 			self.show = function(id) {
@@ -158,4 +176,5 @@ app.controller('niveauController', [
 			};
 			self.fetchAllNiveaux();
 			self.fetchAllFormations();
+			self.getAllsemestres();
 		} ]);

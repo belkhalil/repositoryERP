@@ -2,12 +2,15 @@ package com.empsi.entities;
 
 import java.io.Serializable;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class TypeFormaton implements Serializable {
@@ -23,9 +26,18 @@ public class TypeFormaton implements Serializable {
 	
 	private String LabelTypeFormation;
 	
+    @JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "idFormation")
-	private Formation formation;
+    private Formation formation;
+	public Formation getFormation() {
+		return formation;
+	}
+
+	public void setFormation(Formation formation) {
+		this.formation = formation;
+	}
+
 
 	public TypeFormaton() {
 		super();
@@ -38,14 +50,7 @@ public class TypeFormaton implements Serializable {
 		LabelTypeFormation = labelTypeFormation;
 	}
 
-	public Formation getFormation() {
-		return formation;
-	}
-
-	public void setFormation(Formation formation) {
-		this.formation = formation;
-	}
-
+	
 	public Long getIdTypeFormation() {
 		return idTypeFormation;
 	}
