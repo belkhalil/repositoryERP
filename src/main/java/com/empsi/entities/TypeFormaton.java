@@ -26,17 +26,17 @@ public class TypeFormaton implements Serializable {
 	
 	private String LabelTypeFormation;
 	
-    @JsonIgnore
-	@ManyToOne
-    @JoinColumn(name = "idFormation")
-    private Formation formation;
-	public Formation getFormation() {
-		return formation;
-	}
+//    @JsonIgnore
+//	@ManyToOne
+//    @JoinColumn(name = "idFormation")
+//    private Formation formation;
+//	public Formation getFormation() {
+//		return formation;
+//	}
 
-	public void setFormation(Formation formation) {
-		this.formation = formation;
-	}
+//	public void setFormation(Formation formation) {
+//		this.formation = formation;
+//	}
 
 
 	public TypeFormaton() {

@@ -14,7 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Niveau implements Serializable {
@@ -43,9 +43,16 @@ public class Niveau implements Serializable {
 
 	// @ManyToMany(targetEntity=Formation.class)
 	// private List<Formation> formations;
-
-	@OneToMany()
-	private List<Semestre> semestres;
+	
+//	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JoinTable(name = "niveau_semestres", joinColumns = { 
+//			@JoinColumn(name = "idNiveau", nullable = false, updatable = false) }, 
+//			inverseJoinColumns = { @JoinColumn(name = "idSemestre", 
+//					nullable = false, updatable = false) })
+//    private List<Semestre> semestres;
+	
+//	@OneToMany()
+//	private List<Semestre> semestres;
 
 	@OneToMany()
 	private List<Formation> formations;
@@ -76,13 +83,13 @@ public class Niveau implements Serializable {
 		this.prix = prix;
 	}
 
-	public List<Semestre> getSemestres() {
-		return semestres;
-	}
-
-	public void setSemestres(List<Semestre> semestres) {
-		this.semestres = semestres;
-	}
+//	public List<Semestre> getSemestres() {
+//		return semestres;
+//	}
+//
+//	public void setSemestres(List<Semestre> semestres) {
+//		this.semestres = semestres;
+//	}
 
 	public Long getIdNiveau() {
 		return idNiveau;

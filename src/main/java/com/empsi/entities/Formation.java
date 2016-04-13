@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -17,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -65,26 +67,46 @@ public abstract class Formation implements Serializable{
 	@ManyToMany(mappedBy = "formations")
     private List<Module> modules;
 	
-	@JsonIgnore
-	@ManyToOne
-    @JoinColumn(name = "idNiveau")
-    private Niveau niveau; 
+//	@JsonIgnore
+//	@ManyToOne
+//    @JoinColumn(name = "idNiveau")
+//    private Niveau niveau; 
 	
 //	@OneToMany( targetEntity=TypeFormaton.class )
 //    private List<TypeFormaton> typeFormations;
 	
-  
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "formation_typeformation", joinColumns = { 
+			@JoinColumn(name = "idFormation", nullable = false, updatable = false) }, 
+			inverseJoinColumns = { @JoinColumn(name = "idTypeFormation", 
+					nullable = false, updatable = false) })
+    private List<TypeFormaton> typeFormations;
+	
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "formation_Niveau", joinColumns = { 
+			@JoinColumn(name = "idFormation", nullable = false, updatable = false) }, 
+			inverseJoinColumns = { @JoinColumn(name = "idNiveau", 
+					nullable = false, updatable = false) })
+    private List<Niveau> niveaux;
+	
 	
 	//@OneToMany(mappedBy = "formation")
-	@OneToMany()
-	private List<TypeFormaton> typeFormations;
+//	@OneToMany()
+//	private List<TypeFormaton> typeFormations;
 	
-	public Niveau getNiveau() {
-		return niveau;
+public List<Niveau> getNiveaux() {
+		return niveaux;
 	}
-	public void setNiveau(Niveau niveau) {
-		this.niveau = niveau;
+	public void setNiveaux(List<Niveau> niveaux) {
+		this.niveaux = niveaux;
 	}
+	//	public Niveau getNiveau() {
+//		return niveau;
+//	}
+//	public void setNiveau(Niveau niveau) {
+//		this.niveau = niveau;
+//	}
 	public List<TypeFormaton> getTypeFormations() {
 		return typeFormations;
 	}

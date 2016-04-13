@@ -60,25 +60,14 @@ public class NiveauMetierImpl implements INiveauMetier {
 		FormationDiplomante formation = formatinDiplomanteRepository.findOne(idFormation);
 		Niveau niveau = niveauRepository.findOne(idNiveau);
 		niveau.getFormations().add(formation);
-		formation.setNiveau(niveau);
+		
 		
 		niveauRepository.saveAndFlush(niveau);
 		formatinDiplomanteRepository.saveAndFlush(formation);
 		return true;
 	}
 
-	@Override
-	public boolean addSemestreToNiveau(Long idSemestre, Long idNiveau) {
-		Semestre semestre = semestreRepository.findOne(idSemestre);
-		Niveau niveau = niveauRepository.findOne(idNiveau);
-		semestre.setNiveau(niveau);
-		niveau.getSemestres().add(semestre);
-		
-		semestreRepository.saveAndFlush(semestre);
-		niveauRepository.saveAndFlush(niveau);
-
-		return true;
-	}
+	
 
 	@Override
 	public boolean removeFormationFromNiveau(Long idFormation, Long idNiveau) {
@@ -92,17 +81,6 @@ public class NiveauMetierImpl implements INiveauMetier {
 		return true;
 	}
 
-	@Override
-	public boolean removeSemestreFromNiveau(Long idSemestre, Long idNiveau) {
-		Semestre semestre = semestreRepository.findOne(idSemestre);
-		Niveau niveau = niveauRepository.findOne(idNiveau);
-		//semestre.setNiveau(niveau);
-		niveau.getSemestres().remove(semestre);
-		
-		semestreRepository.saveAndFlush(semestre);
-		niveauRepository.saveAndFlush(niveau);
-
-		return true;
-	}
+	
 
 }

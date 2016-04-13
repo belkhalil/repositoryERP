@@ -130,16 +130,5 @@ public class NiveauController {
 		return new ResponseEntity<Niveau>(HttpStatus.OK);
 	}
 	
-	 /**	  * 
-	  * @param idS
-	  * @param idN
-	  * @return
-	  */
-	@RequestMapping(value="/addSemestreToNiveau" ,method = RequestMethod.POST)
-	public ResponseEntity<Niveau> addSemestreToNiveau(@RequestParam(value="ids") Long idS ,@RequestParam(value="idn") Long idN)
-	{
-		niveauMetierImpl.addSemestreToNiveau(idS, idN);
-		return new ResponseEntity<Niveau>(HttpStatus.OK);
-		
-	}
+	 
 }

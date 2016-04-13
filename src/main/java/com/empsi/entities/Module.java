@@ -36,6 +36,22 @@ public class Module implements Serializable{
 					nullable = false, updatable = false) })
 	private List<Formation> formations;
 
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	@JoinTable(name = "Module_Semestre", joinColumns = { 
+			@JoinColumn(name = "idModule", nullable = false, updatable = false) }, 
+			inverseJoinColumns = { @JoinColumn(name = "idSemestre", 
+					nullable = false, updatable = false) })
+	private List<Semestre> Semestres;
+	
+	
+	public List<Semestre> getSemestres() {
+		return Semestres;
+	}
+
+	public void setSemestres(List<Semestre> semestres) {
+		Semestres = semestres;
+	}
+
 	public Long getIdModule() {
 		return idModule;
 	}

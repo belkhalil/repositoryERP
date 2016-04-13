@@ -2,7 +2,7 @@ app.controller('niveauController', [
 		'$scope',
 		'NiveauService',
 		'FormationDService',
-		'SemestreService',
+		
 		'$http',
 		'$q',
 		function($scope, NiveauService, FormationDService,SemestreService, $http,$q) {
@@ -21,26 +21,21 @@ app.controller('niveauController', [
 				prix : '',
 				formations:[]
 			};
+			
 			self.niveaux = [];
 			self.formations = [];
 			self.formation = {
 				idFormation : null,
 				nomFormation : ''
 			};
-			self.idSelectedSemestre ='';
-			self.semestres=[];
+			
+			
 			self.idformation = '';
 			self.nformation = '';
 			self.idniveau='';
 			$scope.showMe = false;
 			
-            self.getAllsemestres=function(){
-            	SemestreService.fetchAllSemestre().then(function(d) {
-					self.semestres = d;
-				}, function(errResponse) {
-					console.error('Error while fetching Currencies');
-				});
-            };
+            
 			self.fetchAllFormations = function() {
 				FormationDService.fetchAllFormations().then(function(d) {
 					self.formations = d;
@@ -74,8 +69,7 @@ app.controller('niveauController', [
 							self.niveau = d;
 			                console.log(' id de formation a ajouter:'+ self.idformation+' au niveau '+self.niveau.idNiveau);
 			                self.addFornationToNiveau(self.idformation,self.niveau.idNiveau);
-			                console.log(' id de semestre a ajouter:'+ self.idSelectedSemestre+' au niveau '+self.niveau.idNiveau);
-			                self.addSemestreToNiveau(self.idSelectedSemestre,self.niveau.idNiveau);
+			                
 						
 						}, function(errResponse) {
 							console.error('Error while creating niveau.');
@@ -159,7 +153,19 @@ app.controller('niveauController', [
 				$scope.showMe = !$scope.showMe;
 
 			};
-
+			
+/**--------------------------------checkbox pour les semestres-----------------------------------------**/
+//							  
+//			self.isChecked = function(id){
+//			      var match = false;
+//			      for(var i=0 ; i < self.semestres.length; i++) {
+//			        if(self.semestres[i].id == id){
+//			          match = true;
+//			        }
+//			      }
+//			      return match;
+//			  }; 
+ /**--------------------------------\checkbox pour les semestres----------------------------------------**/
 			self.reset = function() {
 				self.niveau = {
 					idNiveau : null,
@@ -176,5 +182,5 @@ app.controller('niveauController', [
 			};
 			self.fetchAllNiveaux();
 			self.fetchAllFormations();
-			self.getAllsemestres();
+			
 		} ]);

@@ -56,10 +56,10 @@
 								<div class="form-group col-md-12">
 									<label class="col-md-2 control-lable" for=""></label>
 									<div class="col-md-7">
-										<input type="date" datetime="yyyy-MM-dd"
+										<input type="text" datetime="dd-MM-yyyy"
 											ng-model="ctrl.formation.dateDebut" id="dateD"
 											class="form-control input-sm"
-											placeholder="date de debut de formation / yyyy-MM-dd" />
+											placeholder="date de debut de formation / dd-MM-yyyy" />
 									</div>
 								</div>
 							</div>
@@ -68,10 +68,10 @@
 								<div class="form-group col-md-12">
 									<label class="col-md-2 control-lable" for=""></label>
 									<div class="col-md-7">
-										<input type="date" datetime="yyyy-MM-dd"
+										<input type="text" datetime="dd-MM-yyyy"
 											ng-model="ctrl.formation.dateFin" id="dateF"
 											class="form-control input-sm"
-											placeholder="date fin de formation / yyyy-MM-dd" />
+											placeholder="date fin de formation / dd-MM-yyyy" />
 									</div>
 								</div>
 							</div>
@@ -92,7 +92,7 @@
 									<label class="col-md-2 control-lable" for=""></label>
 									<div class="col-md-7">
 										<select class="form-control input-sm" ng-model="ctrl.idSelectedType" >
-										<option>type de formation</option>
+										<option value="">-- Type de formation --</option>
 								<option ng-repeat="t in ctrl.typeFormations" value="{{t.idTypeFormation}}">{{t.labelTypeFormation}} </option>
  	                              </select>
 

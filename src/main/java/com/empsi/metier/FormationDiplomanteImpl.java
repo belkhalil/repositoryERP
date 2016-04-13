@@ -52,7 +52,8 @@ public class FormationDiplomanteImpl implements IFormationDiplomanteMetier {
         
 		
 		formation.getTypeFormations().add(typef);
-		typef.setFormation(formation);
+		//typef.setFormation(formation);
+		
 		formatinDiplomanteRepository.saveAndFlush(formation);
 		typeFormationRepository.saveAndFlush(typef);
 		return true;
