@@ -29,7 +29,7 @@ public class Module implements Serializable{
 	private String nomModule;
 	private String descModule;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	@JoinTable(name = "formation_module", joinColumns = { 
 			@JoinColumn(name = "idModule", nullable = false, updatable = false) }, 
 			inverseJoinColumns = { @JoinColumn(name = "idFormation", 
@@ -43,7 +43,22 @@ public class Module implements Serializable{
 					nullable = false, updatable = false) })
 	private List<Semestre> Semestres;
 	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	@JoinTable(name = "Module_matieres", joinColumns = { 
+			@JoinColumn(name = "idModule", nullable = false, updatable = false) }, 
+			inverseJoinColumns = { @JoinColumn(name = "idMatiere", 
+					nullable = false, updatable = false) })
+	private List<Matiere> matieres;
 	
+	
+	public List<Matiere> getMatieres() {
+		return matieres;
+	}
+
+	public void setMatieres(List<Matiere> matieres) {
+		this.matieres = matieres;
+	}
+
 	public List<Semestre> getSemestres() {
 		return Semestres;
 	}

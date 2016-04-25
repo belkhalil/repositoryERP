@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.empsi.dao.MatiereRepository;
 import com.empsi.dao.ModuleRepository;
 import com.empsi.dao.SemestreRepository;
+import com.empsi.entities.Matiere;
 import com.empsi.entities.Module;
 import com.empsi.entities.Semestre;
 
@@ -18,6 +20,9 @@ public class ModuleMetierImpl implements IModuleMetier {
 
 	@Autowired
 	SemestreRepository semestreRepository;
+	
+	@Autowired
+	MatiereRepository matiereRepository;
 
 	@Override
 	public Module save(Module m) {
@@ -79,6 +84,26 @@ public class ModuleMetierImpl implements IModuleMetier {
 		m.getSemestres().remove(s);
 		moduleRepository.saveAndFlush(m);
 		semestreRepository.saveAndFlush(s);
+		return true;
+	}
+
+	@Override
+	public boolean addMatierToModule(Long idMatiere, Long idModule) {
+		Module module = moduleRepository.findOne(idModule);
+		Matiere matiere = matiereRepository.findOne(idMatiere);
+		
+		module.getMatieres().add(matiere);
+		moduleRepository.saveAndFlush(module);
+		return true;
+	}
+
+	@Override
+	public boolean removeMatierFromModule(Long idMatiere, Long idModule) {
+		Module module = moduleRepository.findOne(idModule);
+		Matiere matiere = matiereRepository.findOne(idMatiere);
+		
+		module.getMatieres().remove(matiere);
+		moduleRepository.saveAndFlush(module);
 		return true;
 	}
 

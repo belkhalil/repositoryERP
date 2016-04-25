@@ -13,5 +13,6 @@ public interface IModuleMetier {
 	public Boolean delete(Long id);
 	public boolean addModuleToSemestre(Long idModule,Long idSemestre);
 	public boolean removeModuleFromSemestre(Long idModule, Long idSemestre);
-	
+	public boolean addMatierToModule(Long idMatiere, Long idModule);
+	public boolean removeMatierFromModule(Long idMatiere, Long idModule);
 }

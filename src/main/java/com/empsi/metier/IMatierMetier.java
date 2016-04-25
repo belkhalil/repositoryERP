@@ -11,5 +11,5 @@ public interface IMatierMetier {
 	public Matiere Update(Matiere m );
 	public List<Matiere> getAll();
 	public Boolean delete(Long id);
-	public boolean addMatierToModule(Long idMatier, Long idModule);
+	
 }

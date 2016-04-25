@@ -25,9 +25,9 @@ public class Matiere implements Serializable{
 	private Long idMatiere;
 	private String nomMatiere;
 	private String description;
-	@ManyToOne
-	@JoinColumn(name="idModule")
-	private Module module;
+	
+	
+	
 	@ManyToOne
 	@JoinColumn(name="idEnseignant")
 	private Enseignant enseignant;
@@ -49,12 +49,7 @@ public class Matiere implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Module getModule() {
-		return module;
-	}
-	public void setModule(Module module) {
-		this.module = module;
-	}
+	
 	public Enseignant getEnseignant() {
 		return enseignant;
 	}

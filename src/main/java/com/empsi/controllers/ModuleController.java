@@ -114,6 +114,34 @@ public class ModuleController {
 		moduleMetierImpl.removeModuleFromSemestre(idM, idS);
 		return new ResponseEntity<Module>(HttpStatus.OK);
 	}
+	/**
+	 * 
+	 * @param idMa
+	 * @param idMo
+	 * @return
+	 */
+	@RequestMapping(value="/addMatiereToModule" ,method = RequestMethod.POST)
+	public ResponseEntity<Module> addMatiereToModule(@RequestParam(value="idma") Long idMa ,@RequestParam(value="idmo") Long idMo)
+	{
+		moduleMetierImpl.addMatierToModule(idMa, idMo);
+		
+		return new ResponseEntity<Module>(HttpStatus.OK);
+		
+	}
 	
+	/**
+	 * 
+	 * @param idMa
+	 * @param idMo
+	 * @return
+	 */
+	@RequestMapping(value="/removeMatiereFromModule" ,method = RequestMethod.POST)
+	public ResponseEntity<Module> removeMatiereFromModule(@RequestParam(value="idma") Long idMa ,@RequestParam(value="idmo") Long idMo)
+	{
+		moduleMetierImpl.removeMatierFromModule(idMa, idMo);
+		
+		return new ResponseEntity<Module>(HttpStatus.OK);
+		
+	}
 
 }

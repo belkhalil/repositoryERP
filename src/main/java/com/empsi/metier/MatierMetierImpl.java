@@ -47,13 +47,6 @@ public class MatierMetierImpl implements IMatierMetier {
 		return true;
 	}
 
-	@Override
-	public boolean addMatierToModule(Long idMatier, Long idModule) {
-		Matiere matier = matiereRepository.findOne(idMatier);
-		Module module = moduleRepository.findOne(idModule);
-		
-	return true;
-		
-	}
+	
 
 }
